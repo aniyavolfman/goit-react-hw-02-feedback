@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import css from './Paragraph.module.css';
 
 export function Paragraph({ text, number }) {
   return (
     <p>
       {text}
-      <span>{number}</span>
+      <span className={css.text}>{number}</span>
       {text === 'Positive feedback:' && <span>%</span>}
     </p>
   );

@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import { Paragraph } from '../Paragraph/Paragraph';
+import { Notification } from '../Notification/Notification';
 
 export function Statistics({ good, neutral, bad, total, positivePercentage }) {
   return (
+    (good || neutral || bad) ? (
     <>
       <Paragraph text="Good:" number={good} />
       <Paragraph text="Neutral:" number={neutral} />
@@ -13,6 +15,7 @@ export function Statistics({ good, neutral, bad, total, positivePercentage }) {
         number={positivePercentage}
       />
     </>
+    ) : <Notification message="There is no feedback" />
   );
 }
 

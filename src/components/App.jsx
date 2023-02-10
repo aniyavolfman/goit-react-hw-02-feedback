@@ -11,42 +11,55 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleButtonGood = () => {
-    this.setState(prevState => {
-      return { good: prevState.good + 1 };
-    });
-  };
-  handleButtonNeutral = () => {
-    this.setState(prevState => {
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-  handleButtonBad = () => {
-    this.setState(prevState => {
-      return { bad: prevState.bad + 1 };
-    });
+  handleButton = options => {
+    switch (options) {
+      case 'Good':
+        this.setState(prevState => {
+          return { good: prevState.good + 1 };
+        });
+        break;
+
+      case 'Neutral':
+        this.setState(prevState => {
+          return { neutral: prevState.neutral + 1 };
+        });
+        break;
+
+      case 'Bad':
+        this.setState(prevState => {
+          return { bad: prevState.bad + 1 };
+        });
+        break;
+
+      default:
+        console.log('hello');
+    }
   };
 
   countTotalFeedback = () => {
-    return Number(this.state.good) + Number(this.state.neutral) + Number(this.state.bad);
-  }
+    return (
+      Number(this.state.good) +
+      Number(this.state.neutral) +
+      Number(this.state.bad)
+    );
+  };
 
   countPositiveFeedbackPercentage = () => {
     if (this.countTotalFeedback()) {
-      return Math.round((Number(this.state.good) / this.countTotalFeedback()) * 100);
-    } else {return 0};
-  }
+      return Math.round(
+        (Number(this.state.good) / this.countTotalFeedback()) * 100
+      );
+    } else {
+      return 0;
+    }
+  };
   render() {
     return (
       <Container>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={['Good', 'Neutral', 'Bad']}
-            onLeaveFeedback={[
-              this.handleButtonGood,
-              this.handleButtonNeutral,
-              this.handleButtonBad,
-            ]}
+            onLeaveFeedback={this.handleButton}
           />
         </Section>
         <Section title="Statistics">
